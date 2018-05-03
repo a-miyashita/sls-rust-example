@@ -1,0 +1,3 @@
+[submodule "serverless-rust"]
+	path = serverless-rust
+	url = https://github.com/dobrite/serverless-rust.git

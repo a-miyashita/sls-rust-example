@@ -1,0 +1,15 @@
+{
+  "name": "sls-rust-example",
+  "version": "1.0.0",
+  "description": "Example of serverless framework on rust",
+  "main": "handler.js",
+  "dependencies": {
+    "serverless-rust": "file:serverless-rust"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akihiro Miyashita <miya@gameplus.info>",
+  "license": "MIT"
+}
