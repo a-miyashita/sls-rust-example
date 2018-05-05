@@ -6,13 +6,7 @@ provider:
   region: ap-northeast-1
 
 functions:
-  hello_world:
-    handler: handler.hello_world
-    events:
-      - http:
-          path: hello-world
-          method: get
-          cors: true
+  - ${file(./hello_world/conf.yml)}
 
 plugins:
   - serverless-rust
