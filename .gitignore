@@ -12,3 +12,4 @@ Cargo.lock
 **/*.rs.bk
 Cargo.lock
 package-lock.json
+bin/
