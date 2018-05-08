@@ -3,10 +3,45 @@ service: sls-rust-example
 provider:
   name: aws
   runtime: nodejs6.10
+  stage: dev
   region: ap-northeast-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.stage}-*"
+
+custom:
+  writeEnvVars:
+    STAGE: ${self:provider.stage}
 
 functions:
   - ${file(./hello_world/conf.yml)}
+  - ${file(./todos_dynamodb/conf.yml)}
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: "${self:provider.stage}-todos"
 
 plugins:
   - serverless-rust

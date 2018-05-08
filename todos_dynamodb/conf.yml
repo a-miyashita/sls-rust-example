@@ -1,0 +1,42 @@
+todos_dynamodb:
+  handler: handler.todos_dynamodb
+  events:
+    - http:
+        path: todos_dynamodb
+        method: get
+        cors: true
+    - http:
+        path: todos_dynamodb/{id}
+        method: get
+        cors: true
+        request:
+          parameters:
+            paths:
+              id: true
+    - http:
+        path: todos_dynamodb
+        method: post
+    - http:
+        path: todos_dynamodb/{id}
+        method: put
+        cors: true
+        request:
+          parameters:
+            paths:
+              id: true
+    - http:
+        path: todos_dynamodb
+        method: delete
+        cors: true
+        request:
+          parameters:
+            paths:
+              id: true
+    - http:
+        path: todos_dynamodb/{id}
+        method: delete
+        cors: true
+        request:
+          parameters:
+            paths:
+              id: true
